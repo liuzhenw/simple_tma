@@ -1,17 +1,30 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <img alt="Vue logo" src="./assets/logo.png" />
+  <TonConnect />
+  <HelloWorld msg="Hello TWA!" />
+  <p>TWA version:{{ version }}</p>
+  <P>Init Data:{{ initData }}</P>
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
+<script setup>
+import eruda from "eruda";
+import WebApp from "@twa-dev/sdk";
+import HelloWorld from "./components/HelloWorld.vue";
+import TonConnect from "./components/TonConnect.vue";
+import { ref } from "vue";
+eruda.init();
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+const version = ref(WebApp.version);
+const initData = ref(WebApp.initDataUnsafe);
+WebApp.ready();
+WebApp.MainButton.setParams({
+  text: "START",
+  is_active: true,
+  is_visible: true,
+});
+WebApp.MainButton.onClick(() => {
+  WebApp.showAlert("Hello TWA!");
+});
 </script>
 
 <style>
