@@ -43,7 +43,7 @@ jobs:
       - name: 上传构建
         uses: actions/upload-pages-artifact@v1
         with:
-          path: './dist'
+          path: './docs'
       - name: 部署到 GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v1
