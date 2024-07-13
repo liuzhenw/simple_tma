@@ -1,0 +1,49 @@
+name: Vue项目部署
+
+on:
+  # 针对默认分支的推送
+  push:
+    branches:
+      - master
+  # 允许手动触发
+  workflow_dispatch:
+
+# 设置 GITHUB_TOKEN 权限以允许部署到 GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 允许一个并行部署
+concurrency:
+  group:  '页面'
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: 设置 Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'npm'
+          cache-dependency-path: './'
+      - name: 安装依赖
+        run: npm install
+      - name: 构建
+        run: npm run build
+      - name: 设置页面
+        users: actions/configure-pages@v3
+      - name: 上传构建
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: './dist'
+      - name: 部署到 GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1
