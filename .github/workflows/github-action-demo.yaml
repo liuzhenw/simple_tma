@@ -4,7 +4,7 @@ on:
   # 针对默认分支的推送
   push:
     branches:
-      - master
+      - main
   # 允许手动触发
   workflow_dispatch:
 
@@ -39,7 +39,7 @@ jobs:
       - name: 构建
         run: npm run build
       - name: 设置页面
-        users: actions/configure-pages@v3
+        uses: actions/configure-pages@v3
       - name: 上传构建
         uses: actions/upload-pages-artifact@v1
         with:
