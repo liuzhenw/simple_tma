@@ -9,7 +9,7 @@ import { onMounted } from "vue";
 
 onMounted(async () => {
   const connector = new TonConnectUI({
-    manifestUrl: "https://192.168.31.6:8080/tonconnect-manifest.json",
+    manifestUrl: "https://liuzhenw.github.io/simple_tma/tonconnect-manifest.json",
     buttonRootId: "ton-connect",
   });
   connector.uiOptions = {
