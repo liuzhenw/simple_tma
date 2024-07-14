@@ -9,7 +9,8 @@ import { onMounted } from "vue";
 
 onMounted(async () => {
   const connector = new TonConnectUI({
-    manifestUrl: "https://liuzhenw.github.io/simple_tma/tonconnect-manifest.json",
+    manifestUrl:
+      "https://liuzhenw.github.io/simple_tma/tonconnect-manifest.json",
     buttonRootId: "ton-connect",
   });
   connector.uiOptions = {
@@ -24,7 +25,7 @@ onMounted(async () => {
   console.debug(wallets);
 
   connector.onStatusChange((status) => {
-    console.debug(`Connection status: ${status}`);
+    console.debug(`Connection status:`, status);
   });
 });
 </script>

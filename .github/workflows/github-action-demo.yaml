@@ -1,4 +1,7 @@
-name: Vue项目部署
+# 工作流的名称
+name: 项目部署
+# 工作流运行的名称
+run-name: Deploy to GitHub Pages by @${{ github.actor }}
 
 on:
   # 针对默认分支的推送
@@ -16,11 +19,12 @@ permissions:
 
 # 允许一个并行部署
 concurrency:
-  group:  '页面'
+  group:  'pages'
   cancel-in-progress: true
 
 jobs:
   deploy:
+    name: 部署
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

@@ -17,13 +17,15 @@ eruda.init();
 const version = ref(WebApp.version);
 const initData = ref(WebApp.initDataUnsafe);
 WebApp.ready();
+if (!WebApp.isExpanded) WebApp.expand();
 WebApp.MainButton.setParams({
   text: "START",
   is_active: true,
   is_visible: true,
 });
 WebApp.MainButton.onClick(() => {
-  WebApp.showAlert("Hello TWA!");
+  //WebApp.showAlert("Hello TWA!");
+  WebApp.sendData("Hello TWA!");
 });
 </script>
 
